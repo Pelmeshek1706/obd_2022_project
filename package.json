@@ -1,10 +1,10 @@
 {
-  "name": "edu_db_labs",
+  "name": "GOATstats",
   "version": "2.1.0",
   "main": "index.js",
-  "description": "Databases labs template",
-  "repository": "https://github.com/boldak/dis-edu",
-  "author": "Andrey Boldak <boldak.andrey@gmail.com>",
+  "description": "Система аналізу медіа-контенту",
+  "repository": "https://github.com/Pelmeshek1706/obd_2022_project",
+  "author": "nikita basenko <nikitabas83@gmail.com>",
   "license": "ECL 2.0",
   "scripts": {
     "docs:dev": "npx vuepress dev docs",

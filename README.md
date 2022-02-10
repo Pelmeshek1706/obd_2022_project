@@ -67,3 +67,6 @@ cd -
 - [Методичні вказівки](./guidelines/guidelines.md)
 
 ***Happy learning! Happy coding!*** 
+
+
+testing some new
