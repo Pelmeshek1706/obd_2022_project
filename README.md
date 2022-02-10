@@ -58,7 +58,7 @@ cd -
     npm run docs:dev
 ```
 
-Доступ до локально опублікованої версії [Cайт проекту](https://pelmeshek1706.github.io/obd_2022_project/)
+Доступ до локально опублікованої версії [Cайт проекту](https://pelmeshek1706.github.io/Project_obd_2022/)
 
 
 ## Додаткова інформація
