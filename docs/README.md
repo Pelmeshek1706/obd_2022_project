@@ -3,14 +3,23 @@ home: true
 actionText: Розпочати →
 actionLink: /intro/
 
-footer: "ECL 2.0 Licensed | Copyright © [YYYY] [Your Name]"
+footer: "ECL 2.0 Licensed | Copyright © [2022] [Pelmeshek]"
 ---
 
 
-**Виконав(-ла):** 
+**Виконали:** 
 
-*студент(-ка) 2-го курсу, групи (шифр групи)*<span padding-right:5em></span> **[ім’я ПРІЗВИЩЕ] [Посилання email, tg, fb]**
+*студент 2-го курсу, групи ІО-05*<span padding-right:5em></span> **Нікіта БАСЕНКО [Посилання tg](http://t.me/pelmeshek1706)**
 
+*студент 2-го курсу, групи ІО-05*<span padding-right:5em></span> **Ігор ЛОСІНСЬКИЙ [Посилання tg](http://t.me/Ihor_Losinskyi)**
+
+*студент 2-го курсу, групи ІО-05*<span padding-right:5em></span> **Дмитро ЗИКОВ [Посилання tg](http://t.me/dmytrozykov)**
+
+*студент 2-го курсу, групи ІО-05*<span padding-right:5em></span> **Мирослав ЛУЧИЦЬКИЙ [Посилання tg](http://t.me/b_agel_d)**
+
+*студент 2-го курсу, групи ІО-05*<span padding-right:5em></span> **Іван МИХАЙЛОВ [Посилання tg](http://t.me/Lancelotovich)**
+
+*студент 2-го курсу, групи ІО-05*<span padding-right:5em></span> **Максим МАЛЬГІНОВ [Посилання tg](http://t.me/toxik33)**
 
 **Керівник**
 
