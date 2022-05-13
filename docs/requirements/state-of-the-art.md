@@ -113,4 +113,5 @@ _хмарна система_ - технології розподіленої о
 + https://azure.microsoft.com/ru-ru/services/cognitive-services/text-analytics/#overview
 + https://uk.wikipedia.org/wiki/%D0%9A%D0%BE%D0%BD%D1%82%D0%B5%D0%BD%D1%82-%D0%B0%D0%BD%D0%B0%D0%BB%D1%96%D0%B7
 + https://psyfactor.org/lib/content-analysis2.htm
++ https://books.google.co.uk/books?id=GsBDDwAAQBAJ&pg=PR4&lpg=PR4&dq=isbn+978-0-7494-8154-4&source=bl&ots=KBXyhI7g7c&sig=ACfU3U2SqfryyfFvW1kM7Ah7gz3Z5GG0gQ&hl=ru&sa=X&ved=2ahUKEwjB08jaoNf3AhXRolwKHStqD60Q6AF6BAgDEAM#v=onepage&q=isbn%20978-0-7494-8154-4&f=false
 
