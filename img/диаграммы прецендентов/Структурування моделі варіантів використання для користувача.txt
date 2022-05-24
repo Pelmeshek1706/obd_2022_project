@@ -1,0 +1,41 @@
+@startuml
+
+actor "User" as User
+
+usecase regusr as "regusr
+--
+ Реєстрація" 
+usecase auticat as "auticat
+--
+ Авторизація" 
+usecase map_filter as "map_filter
+--
+ Фільтр на мапі"
+usecase standart_request as "standart_request
+--
+ Запит необхідної інформації"
+ 
+usecase FAQ as "FAQ
+--
+ Питання для нових\n користувачів"
+
+
+User -d-> regusr 
+User -d-> auticat 
+User -u-> standart_request 
+User -u-> map_filter 
+User -d-> FAQ
+
+
+usecase filters as "filters
+--
+ Фільтр результатів запиту" 
+
+usecase map_filter_ed as "map_filter_ed
+--
+Редагування фільтрів" 
+
+filters ...> standart_request :extends  
+map_filter_ed ...> map_filter :extends 
+ 
+@enduml

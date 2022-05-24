@@ -1,0 +1,27 @@
+@startuml
+skinparam actorStyle awesome
+actor "Admin" as Admin
+
+usecase admin_stat as "admin_stat
+--
+ Експорт статистики" 
+usecase admin_panel as "admin_panel
+--
+ Меню адміністратора"
+
+Admin -l-> admin_panel
+Admin -r-> admin_stat 
+
+usecase "EdFil\n Редагування\nфільтрів" as edfil
+usecase "EdSrs\n Редагування\nджерел" as edsrs
+usecase "EdStat\nВибір конкретних\n метрик" as EdStat
+usecase "EdUsr\nЗміна прав\nКористувача" as EdUsr
+usecase "EdMap\nРедагування мапи" as edmap
+
+edmap ...> admin_panel :extends
+edsrs ...> admin_panel :extends
+edfil ...> admin_panel :extends  
+EdStat ...> admin_stat :extends 
+EdUsr ...> admin_panel :extends
+
+@enduml

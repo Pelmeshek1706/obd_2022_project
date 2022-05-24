@@ -1,0 +1,47 @@
+@startuml
+
+actor "User" as User
+skinparam actorStyle awesome
+actor "Admin" as Admin
+
+usecase regusr as "regusr
+--
+ Реєстрація"
+usecase auticat as "auticat
+--
+ Авторизація користувача"
+usecase standart_request as "standart_request
+--
+ Запит необхідної інформації" 
+usecase filters as "filters
+--
+ Фільтр результатів запиту"
+usecase FAQ as "FAQ
+--
+ Питання для нових\n користувачів"
+usecase map_filter as "map_filter
+--
+ Фільтр на мапі"
+
+
+User -l-> regusr
+User -r-> auticat
+User -u-> standart_request
+User -u-> filters
+User -u-> map_filter 
+User -u-> FAQ
+
+usecase admin_stat as "admin_stat
+--
+ Експорт статистики" 
+usecase admin_panel as "admin_panel
+--
+ Меню адміністратора" 
+
+Admin -d-> admin_stat
+Admin -d-> admin_panel
+
+
+Admin -u-|> User
+
+@enduml
