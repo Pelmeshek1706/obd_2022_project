@@ -1,0 +1,126 @@
+@startuml
+
+
+entity MassMedia #2ef0a9
+{
+ID: INT
+name_media: VARCHAR
+}
+
+
+entity offCountrySources #2ef0a9
+{
+ID:INT
+source_URL: VARCHAR
+mass_media_ID: INT
+country_ID: INT
+}
+
+
+entity yellowPress #2ef0a9
+{
+ID:INT
+country_ID: INT
+yellow_press_URL: VARCHAR
+}
+
+entity currency #2ef0a9
+{
+ID:INT
+currency_name VARCHAR
+}
+
+
+entity neighbours #2ef0a9
+{
+ID:INT
+neighbour_name: VARCHAR
+neighbour_ID: INT
+}
+
+
+entity countries #2ef0a9
+{
+ID:INT
+country_name : VARCHAR
+country_pres: VARCHAR
+country_description: TEXT
+last_update: DATE
+population: INT
+currency_ID: INT
+}
+
+entity userSex #2ef0a9
+{
+ID:INT
+user_sex: VARCHAR
+}
+
+
+entity userRole #2ef0a9
+{
+ID:INT
+user_role: VARCHAR
+}
+
+
+entity statistic #2ef0a9
+{
+ID:INT
+user_id: INT
+queries_count: INT
+filter_ID: INT
+country_ID: INT
+user_count: INT
+}
+
+
+entity comment #2ef0a9
+{
+ID:INT
+comment_author: INT
+comment_text: VARCHAR
+}
+
+
+entity filters #2ef0a9
+{
+ID:INT
+filter_name: VARCHAR
+filter_count: INT
+}
+
+
+entity user #2ef0a9
+{
+ID:INT
+user_login: VARCHAR
+user_password: VARCHAR
+user_first_name: VARCHAR
+user_last_name: VARCHAR
+user_age: INT
+user_role_id: INT
+user_sex_id: INT
+user_email: VARCHAR
+user_last_update: DATE
+}
+
+
+
+offCountrySources "n" -r- "1" MassMedia
+countries "1" -u- "n" offCountrySources
+countries "n" -- "1" yellowPress
+countries "n" -l- "1" neighbours
+countries "1" -r- "n*" currency
+countries "n*" -- "1" statistic
+
+
+user "1" -l- "n*" userSex
+user "1" -- "n*" userRole
+statistic "1" -- "n*" user 
+user "n" -r- "1" comment
+
+statistic "1" -r- "n*" filters
+
+
+@enduml
