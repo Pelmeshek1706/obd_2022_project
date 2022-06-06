@@ -1,0 +1,371 @@
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+
+
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `mydb` ;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`userRole`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`userRole` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`userRole` (
+                                                 `ID` INT NOT NULL AUTO_INCREMENT,
+                                                 `user_role` VARCHAR(45) NOT NULL,
+                                                 PRIMARY KEY (`ID`),
+                                                 UNIQUE INDEX `user_role_UNIQUE` (`user_role` ASC) VISIBLE)
+    ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`userSex`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`userSex` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`userSex` (
+                                                `ID` INT NOT NULL AUTO_INCREMENT,
+                                                `user_sex` VARCHAR(45) NOT NULL,
+                                                PRIMARY KEY (`ID`),
+                                                UNIQUE INDEX `user_sex_UNIQUE` (`user_sex` ASC) VISIBLE)
+    ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`currency`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`currency` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`currency` (
+                                                 `ID` INT NOT NULL AUTO_INCREMENT,
+                                                 `currency_name` VARCHAR(64) NOT NULL,
+                                                 PRIMARY KEY (`ID`))
+    ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`countries`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`countries` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`countries` (
+                                                  `ID` INT NOT NULL AUTO_INCREMENT,
+                                                  `country_name` VARCHAR(64) NOT NULL,
+                                                  `country_pres` VARCHAR(45) NOT NULL,
+                                                  `country_description` TEXT NULL,
+                                                  `last_update` DATE NOT NULL,
+                                                  `population` INT UNSIGNED NULL,
+                                                  `currency_ID` INT NOT NULL,
+                                                  PRIMARY KEY (`ID`),
+                                                  UNIQUE INDEX `coubtry_name_UNIQUE` (`country_name` ASC) VISIBLE,
+                                                  UNIQUE INDEX `country_pres_UNIQUE` (`country_pres` ASC) VISIBLE,
+                                                  INDEX `fk_countries_currency1_idx` (`currency_ID` ASC) VISIBLE,
+                                                  CONSTRAINT `fk_countries_currency1`
+                                                      FOREIGN KEY (`currency_ID`)
+                                                          REFERENCES `mydb`.`currency` (`ID`)
+                                                          ON DELETE NO ACTION
+                                                          ON UPDATE NO ACTION)
+    ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`neighbours`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`neighbours` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`neighbours` (
+                                                   `ID` INT NOT NULL AUTO_INCREMENT,
+                                                   `neighbour_name` VARCHAR(256) NOT NULL,
+                                                   `neighbour_ID` INT NOT NULL,
+                                                   PRIMARY KEY (`ID`, `neighbour_ID`),
+                                                   INDEX `fk_neighbours_countries1_idx` (`neighbour_ID` ASC) VISIBLE,
+                                                   CONSTRAINT `fk_neighbours_countries1`
+                                                       FOREIGN KEY (`neighbour_ID`)
+                                                           REFERENCES `mydb`.`countries` (`ID`)
+                                                           ON DELETE NO ACTION
+                                                           ON UPDATE NO ACTION)
+    ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`MassMedia`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`MassMedia` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`MassMedia` (
+                                                  `ID` INT NOT NULL AUTO_INCREMENT,
+                                                  `name_media` VARCHAR(45) NULL,
+                                                  PRIMARY KEY (`ID`),
+                                                  UNIQUE INDEX `name_media_UNIQUE` (`name_media` ASC) VISIBLE)
+    ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`user`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`user` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`user` (
+                                                    `ID` INT NOT NULL AUTO_INCREMENT,
+                                                    `user_login` VARCHAR(64) NOT NULL,
+                                                    `user_password` VARCHAR(255) NOT NULL,
+                                                    `user_first_name` VARCHAR(45) NULL DEFAULT NULL,
+                                                    `user_last_name` VARCHAR(45) NULL DEFAULT NULL,
+                                                    `user_age` INT UNSIGNED NULL DEFAULT NULL,
+                                                    `user_role_id` INT NOT NULL,
+                                                    `user_sex_id` INT NULL DEFAULT NULL,
+                                                    `user_email` VARCHAR(255) NULL,
+                                                    `user_last_update` DATE NULL,
+                                                    PRIMARY KEY (`ID`),
+                                                    UNIQUE INDEX `user_name_UNIQUE` (`user_login` ASC) VISIBLE,
+                                                    INDEX `user_sex_id_idx` (`user_sex_id` ASC) VISIBLE,
+                                                    INDEX `user_role_id_idx` (`user_role_id` ASC) VISIBLE,
+                                                    CONSTRAINT `user_role_id`
+                                                        FOREIGN KEY (`user_role_id`)
+                                                            REFERENCES `mydb`.`userRole` (`ID`)
+                                                            ON DELETE NO ACTION
+                                                            ON UPDATE NO ACTION,
+                                                    CONSTRAINT `user_sex_id`
+                                                        FOREIGN KEY (`user_sex_id`)
+                                                            REFERENCES `mydb`.`userSex` (`ID`)
+                                                            ON DELETE NO ACTION
+                                                            ON UPDATE NO ACTION)
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8mb4
+    COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`comment`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`comment` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`comment` (
+                                                `ID` INT NOT NULL AUTO_INCREMENT,
+                                                `comment_author` INT NOT NULL,
+                                                `comment_text` VARCHAR(5000) NULL,
+                                                INDEX `comment_id_idx` (`comment_author` ASC) VISIBLE,
+                                                PRIMARY KEY (`ID`, `comment_author`),
+                                                CONSTRAINT `comment_author`
+                                                    FOREIGN KEY (`comment_author`)
+                                                        REFERENCES `mydb`.`user` (`ID`)
+                                                        ON DELETE NO ACTION
+                                                        ON UPDATE NO ACTION)
+    ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`yellowPress`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`yellowPress` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`yellowPress` (
+                                                    `ID` INT NOT NULL AUTO_INCREMENT,
+                                                    `country_ID` INT NOT NULL,
+                                                    `yellow_press_URL` VARCHAR(1000) NULL,
+                                                    PRIMARY KEY (`ID`, `country_ID`),
+                                                    INDEX `country_ID_idx` (`country_ID` ASC) VISIBLE,
+                                                    CONSTRAINT `yellowPress_country_ID`
+                                                        FOREIGN KEY (`country_ID`)
+                                                            REFERENCES `mydb`.`countries` (`ID`)
+                                                            ON DELETE NO ACTION
+                                                            ON UPDATE NO ACTION)
+    ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`filters`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`filters` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`filters` (
+                                                `ID` INT NOT NULL AUTO_INCREMENT,
+                                                `filter_name` VARCHAR(64) NOT NULL,
+                                                `filter_count` INT UNSIGNED NULL,
+                                                PRIMARY KEY (`ID`),
+                                                UNIQUE INDEX `filter_name_UNIQUE` (`filter_name` ASC) VISIBLE)
+    ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`statistic`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`statistic` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`statistic` (
+                                                  `ID` INT NOT NULL AUTO_INCREMENT,
+                                                  `user_id` INT NOT NULL,
+                                                  `queries_count` INT NULL,
+                                                  `filter_ID` INT NOT NULL,
+                                                  `country_ID` INT NOT NULL,
+                                                  `user_count` INT UNSIGNED NOT NULL,
+                                                  PRIMARY KEY (`ID`),
+                                                  INDEX `fk_statistic_user1_idx` (`user_id` ASC) VISIBLE,
+                                                  INDEX `fk_statistic_filters1_idx` (`filter_ID` ASC) VISIBLE,
+                                                  INDEX `fk_statistic_countries1_idx` (`country_ID` ASC) VISIBLE,
+                                                  CONSTRAINT `fk_statistic_user1`
+                                                      FOREIGN KEY (`user_id`)
+                                                          REFERENCES `mydb`.`user` (`ID`)
+                                                          ON DELETE NO ACTION
+                                                          ON UPDATE NO ACTION,
+                                                  CONSTRAINT `fk_statistic_filters1`
+                                                      FOREIGN KEY (`filter_ID`)
+                                                          REFERENCES `mydb`.`filters` (`ID`)
+                                                          ON DELETE NO ACTION
+                                                          ON UPDATE NO ACTION,
+                                                  CONSTRAINT `fk_statistic_countries1`
+                                                      FOREIGN KEY (`country_ID`)
+                                                          REFERENCES `mydb`.`countries` (`ID`)
+                                                          ON DELETE NO ACTION
+                                                          ON UPDATE NO ACTION)
+    ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`offCountrySources`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`offCountrySources` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`offCountrySources` (
+                                                          `ID` INT NOT NULL AUTO_INCREMENT,
+                                                          `source_URL` VARCHAR(1000) NOT NULL,
+                                                          `mass_media_ID` INT NOT NULL,
+                                                          `country_ID` INT NOT NULL,
+                                                          UNIQUE INDEX `tw_URL_UNIQUE` (`source_URL` ASC) VISIBLE,
+                                                          PRIMARY KEY (`ID`, `mass_media_ID`, `country_ID`),
+                                                          INDEX `offCountrySources_country_ID_idx` (`country_ID` ASC) VISIBLE,
+                                                          CONSTRAINT `fk_Twitter_MassMedia2`
+                                                              FOREIGN KEY (`mass_media_ID`)
+                                                                  REFERENCES `mydb`.`MassMedia` (`ID`)
+                                                                  ON DELETE NO ACTION
+                                                                  ON UPDATE NO ACTION,
+                                                          CONSTRAINT `offCountrySources_country_ID`
+                                                              FOREIGN KEY (`country_ID`)
+                                                                  REFERENCES `mydb`.`countries` (`ID`)
+                                                                  ON DELETE NO ACTION
+                                                                  ON UPDATE NO ACTION)
+    ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+INSERT INTO currency (currency_name) VALUES ('Hryvnya'), ('Zloty'), ('Pound sterling'), ('United States Dollar');
+
+INSERT INTO countries (country_name, country_pres, country_description, last_update, population, currency_ID) VALUES
+                                                                                                                  ('Ukraine', 'Volodymyr Zelensky', 'Ukraine is a country in Eastern Europe. It is the second largest country in Europe after Russia, which borders it to the east and north-east.',
+                                                                                                                   '2022-05-30', 44130000, 1),
+                                                                                                                  ('Poland', 'Andrzej Duda', 'Poland, officially the Republic of Poland, is a country in Central Europe. It is divided into 16 administrative provinces called voivodeships, covering an area of 312,696 km². Poland has a population of over 38 million and is the fifth-most populous member state of the European Union.',
+                                                                                                                   '2022-05-30', 37950000, 2),
+                                                                                                                  ('United Kingdom', 'Queen Elizabeth II', 'The United Kingdom, made up of England, Scotland, Wales and Northern Ireland, is an island nation in northwestern Europe. England – birthplace of Shakespeare and The Beatles – is home to the capital, London, a globally influential centre of finance and culture. England is also site of Neolithic Stonehenge, Bath’s Roman spa and centuries-old universities at Oxford and Cambridge.',
+                                                                                                                   '2022-05-30', 67220000, 3),
+                                                                                                                  ('United States', 'Joe Biden', 'The U.S. is a country of 50 states covering a vast swath of North America, with Alaska in the northwest and Hawaii extending the nation’s presence into the Pacific Ocean. Major Atlantic Coast cities are New York, a global finance and culture center, and capital Washington, DC. Midwestern metropolis Chicago is known for influential architecture and on the west coast, Los Angeles\' Hollywood is famed for filmmaking.',
+                                                                                                                   '2022-05-30', 329500000, 4);
+
+INSERT INTO neighbours (neighbour_name, neighbour_id) VALUE
+    ('Belarus', 1),
+    ('Poland', 1),
+    ('Slovakia', 1),
+    ('Hungary', 1),
+    ('Romania', 1),
+    ('Moldova', 1),
+    ('ruzzia', 1);
+
+INSERT INTO neighbours (neighbour_name, neighbour_id) VALUE
+    ('Belarus', 2),
+    ('Ukraine', 2),
+    ('Slovakia', 2),
+    ('Czech Republic', 2),
+    ('Germany', 2),
+    ('Lithuania', 2),
+    ('ruzzia', 2);
+
+INSERT INTO neighbours (neighbour_name, neighbour_id) VALUE
+    ('Ireland', 3),
+    ('Spain', 3),
+    ('Cyprus', 3);
+
+INSERT INTO neighbours (neighbour_name, neighbour_id) VALUE
+    ('Mexico', 4),
+    ('Canada', 4),
+    ('Cuba', 4);
+
+INSERT INTO yellowPress (country_ID, yellow_press_URL) VALUE
+    (1, 'https://www.pravda.com.ua/'),
+    (1, 'https://tsn.ua/'),
+    (1, 'https://censor.net/');
+
+INSERT INTO yellowPress (country_ID, yellow_press_URL) VALUE
+    (2, 'https://www.polskieradio.pl/'),
+    (2, 'https://wyborcza.pl/'),
+    (2, 'https://www.gazetapolska.pl/');
+
+INSERT INTO yellowPress (country_ID, yellow_press_URL) VALUE
+    (3, 'https://www.dailymail.co.uk/'),
+    (3, 'https://www.thesun.co.uk/'),
+    (3, 'https://www.theguardian.com/');
+
+INSERT INTO yellowPress (country_ID, yellow_press_URL) VALUE
+    (4, 'https://www.usatoday.com/'),
+    (4, 'https://www.washingtonpost.com/'),
+    (4, 'https://www.washingtontimes.com/');
+
+SELECT * FROM massMedia;
+INSERT INTO massMedia (name_media) VALUE ('Twitter'), ('Telegram'), ('Youtube'), ('Meta');
+
+SELECT source_URL FROM offCountrySources WHERE mass_media_ID=(SELECT ID FROM massMedia WHERE name_media='Meta');
+INSERT INTO offCountrySources (source_URL, mass_media_ID, country_ID) VALUE
+    ('https://www.youtube.com/c/ukrainernet', 3, 1),
+    ('https://twitter.com/Ukraine', 1, 1),
+    ('https://www.facebook.com/UkraineUA.MFA', 4, 1),
+    ('https://t.me/V_Zelenskiy_official', 2, 1);
+
+INSERT INTO offCountrySources (source_URL, mass_media_ID, country_ID) VALUE
+    ('https://twitter.com/polandmoi?lang=en', 1, 2),
+    ('https://www.facebook.com/poland', 4, 2);
+
+INSERT INTO offCountrySources (source_URL, mass_media_ID, country_ID) VALUE
+    ('https://twitter.com/GOVUK', 1, 3),
+    ('https://www.facebook.com/UKgovernment', 4, 3);
+
+INSERT INTO offCountrySources (source_URL, mass_media_ID, country_ID) VALUE
+    ('https://twitter.com/USAGov', 1, 4),
+    ('https://www.facebook.com/VisitTheUSA/', 4, 4);
+
+INSERT INTO userSex (user_sex) VALUES ('Male'), ('Female'), ('Other');
+
+INSERT INTO userRole (user_role) VALUE ('User'), ('Admin');
+
+USE mydb;
+INSERT INTO user (user_login, user_password, user_first_name, user_last_name, user_age, user_role_id, user_sex_id, user_email, user_last_update) VALUE
+    ('bjohnsonuk', '209addf35a0c3e9e41e44afcad5322aa', 'Boris', 'Johnson', 57, 1, 1, 'borisjohnson@gov.uk', '2022-05-30'),
+    ('joebiden', '2f14c664d635a35f235648ddb524c315', 'Joe', 'Biden', 79, 1, 1, 'joebiden@gov.us', '2022-05-30'),
+    ('admin', '726b3e811142bed8d912ce1ced0d611a', 'Admin', 'Adminovich', 420, 2, 3, 'admiin@poshta.net', '2022-05-30'),
+    ('destroyer228', '1a1cfc1691ff4d13b6e464873108f762', 'Vasya', 'Pyatochkin', 18, 1, 1, 'destroyer228@ukr.net', '2022-05-30');
+
+USE mydb;
+
+INSERT INTO comment (comment_author, comment_text) VALUE
+    (1, 'Microsoft bought Skype for 8,5 billion!.. what a bunch of idiots! I downloaded it for free!'),
+    (1, 'Why go to college? There\'s Google.'),
+    (2, 'The human body was designed by a civil engineer. Who else would run a toxic waste pipeline through a recreational area?'),
+    (3, 'A good lawyer knows the law; a clever one takes the judge to lunch.'),
+    (4, 'Some people come into our lives and leave footprints on our hearts, while others come into our lives and make us wanna leave footprints on their face.');
+
+INSERT INTO filters (filter_name, filter_count) VALUE
+    ('Only Youtube', 5),
+    ('Only Meta', 18),
+    ('Only Twitter', 32),
+    ('Only yellow press', 2);
+
+INSERT INTO statistic (user_ID, queries_count, filter_ID, country_ID, user_count) VALUE
+    (1, 232, 2, 1, 3233),
+    (2, 21, 3, 2, 3232),
+    (3, 345, 3, 2, 1212),
+    (4, 2346, 4, 4, 3),
+    (4, 2, 1, 3, 33);
