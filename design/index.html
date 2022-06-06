@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Проєктування бази даних | Система аналізу медіа-контенту</title>
+    <meta name="generator" content="VuePress 1.9.5">
+    <link rel="icon" href="/obd_2022_project/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="description" content="Лабораторні роботи з дисципліни &quot;Організація баз даних&quot;">
+    
+    <link rel="preload" href="/obd_2022_project/assets/css/0.styles.fa036783.css" as="style"><link rel="preload" href="/obd_2022_project/assets/js/app.10c71b05.js" as="script"><link rel="preload" href="/obd_2022_project/assets/js/2.440c787e.js" as="script"><link rel="preload" href="/obd_2022_project/assets/js/17.9700b484.js" as="script"><link rel="prefetch" href="/obd_2022_project/assets/js/10.17dc7fc0.js"><link rel="prefetch" href="/obd_2022_project/assets/js/11.32ba2003.js"><link rel="prefetch" href="/obd_2022_project/assets/js/12.f4d805b2.js"><link rel="prefetch" href="/obd_2022_project/assets/js/13.b369ab95.js"><link rel="prefetch" href="/obd_2022_project/assets/js/14.4fd45c58.js"><link rel="prefetch" href="/obd_2022_project/assets/js/15.29bd1343.js"><link rel="prefetch" href="/obd_2022_project/assets/js/16.d9cfeece.js"><link rel="prefetch" href="/obd_2022_project/assets/js/18.f75afb7c.js"><link rel="prefetch" href="/obd_2022_project/assets/js/19.aebefa05.js"><link rel="prefetch" href="/obd_2022_project/assets/js/20.bf089b07.js"><link rel="prefetch" href="/obd_2022_project/assets/js/21.d9d3cfe3.js"><link rel="prefetch" href="/obd_2022_project/assets/js/22.eaeb520d.js"><link rel="prefetch" href="/obd_2022_project/assets/js/23.418bb3fe.js"><link rel="prefetch" href="/obd_2022_project/assets/js/24.1ff338f7.js"><link rel="prefetch" href="/obd_2022_project/assets/js/25.2d43caa3.js"><link rel="prefetch" href="/obd_2022_project/assets/js/26.2b7d224e.js"><link rel="prefetch" href="/obd_2022_project/assets/js/3.33d6b42d.js"><link rel="prefetch" href="/obd_2022_project/assets/js/4.5d00dd71.js"><link rel="prefetch" href="/obd_2022_project/assets/js/5.4b8fb81c.js"><link rel="prefetch" href="/obd_2022_project/assets/js/6.19d66de0.js"><link rel="prefetch" href="/obd_2022_project/assets/js/7.3906f7a7.js"><link rel="prefetch" href="/obd_2022_project/assets/js/8.e8761b22.js"><link rel="prefetch" href="/obd_2022_project/assets/js/9.c0a843c2.js">
+    <link rel="stylesheet" href="/obd_2022_project/assets/css/0.styles.fa036783.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/obd_2022_project/" class="home-link router-link-active"><!----> <span class="site-name">Система аналізу медіа-контенту</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/obd_2022_project/" class="nav-link">
+  Початок
+</a></div> <a href="https://github.com/Pelmeshek1706/obd_2022_project" target="_blank" rel="noopener noreferrer" class="repo-link">
+    Github
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/obd_2022_project/" class="nav-link">
+  Початок
+</a></div> <a href="https://github.com/Pelmeshek1706/obd_2022_project" target="_blank" rel="noopener noreferrer" class="repo-link">
+    Github
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><a href="/obd_2022_project/intro/" class="sidebar-link">Вступ</a></li><li><section class="sidebar-group collapsable depth-0"><a href="/obd_2022_project/requirements/" class="sidebar-heading clickable"><span>Розроблення загальних вимог до системи</span> <span class="arrow right"></span></a> <!----></section></li><li><a href="/obd_2022_project/use%20cases/" class="sidebar-link">Розроблення вимог до функціональности системи</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/obd_2022_project/use%20cases/#діаграмми-прецендентів" class="sidebar-link">Діаграмми прецендентів</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/obd_2022_project/use%20cases/#відношення-узагальнення" class="sidebar-link">Відношення узагальнення</a></li><li class="sidebar-sub-header"><a href="/obd_2022_project/use%20cases/#структурування-моделі-варіантів-використання-для-користувача" class="sidebar-link">Структурування моделі варіантів використання для користувача</a></li><li class="sidebar-sub-header"><a href="/obd_2022_project/use%20cases/#структурування-моделі-варіантів-використання-для-адміністратора" class="sidebar-link">Структурування моделі варіантів використання для адміністратора</a></li></ul></li><li class="sidebar-sub-header"><a href="/obd_2022_project/use%20cases/#діаграмми-послідовностеи" class="sidebar-link">Діаграмми послідовностей</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/obd_2022_project/use%20cases/#реєстрація" class="sidebar-link">Реєстрація</a></li><li class="sidebar-sub-header"><a href="/obd_2022_project/use%20cases/#авторизація" class="sidebar-link">Авторизація</a></li><li class="sidebar-sub-header"><a href="/obd_2022_project/use%20cases/#запит-та-фільтрація" class="sidebar-link">Запит та фільтрація</a></li></ul></li><li class="sidebar-sub-header"><a href="/obd_2022_project/use%20cases/#footer-ecl-2-0-licensed-copyright-©-2022-pelmeshek" class="sidebar-link">footer: &quot;ECL 2.0 Licensed | Copyright © [2022] [Pelmeshek]&quot;</a></li></ul></li><li><a href="/obd_2022_project/design/" aria-current="page" class="active sidebar-link">Проектування інформаційного забезпечення</a></li><li><a href="/obd_2022_project/software/" class="sidebar-link">Реалізація інформаційного та програмного забезпечення</a></li><li><a href="/obd_2022_project/test/" class="sidebar-link">Тестування працездатності системи</a></li><li><a href="/obd_2022_project/conclusion/" class="sidebar-link">Висновки</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="проєктування-бази-даних"><a href="#проєктування-бази-даних" class="header-anchor">#</a> Проєктування бази даних</h1> <p>В рамках проекту розробляється:</p> <ul><li>модель бізнес-об'єктів</li></ul> <div class="language- extra-class"><pre class="language-text"><code>@startuml
+
+
+entity MassMedia #2ef0a9
+entity MassMedia.ID
+entity MassMedia.name_media
+
+MassMedia.ID --* MassMedia
+MassMedia.name_media -l-* MassMedia
+
+
+entity offCountrySources #2ef0a9
+entity offCountrySources.ID
+entity offCountrySources.source_URL
+entity offCountrySources.mass_media_ID
+entity offCountrySources.country_ID
+
+offCountrySources.ID --* offCountrySources
+offCountrySources.source_URL --* offCountrySources
+offCountrySources.mass_media_ID -r-* offCountrySources
+offCountrySources.country_ID --* offCountrySources
+
+
+entity yellowPress #2ef0a9
+entity yellowPress.ID
+entity yellowPress.country_ID
+entity yellowPress.yellow_press_URL
+
+yellowPress.ID -l-* yellowPress
+yellowPress.country_ID -u-* yellowPress
+yellowPress.yellow_press_URL --* yellowPress
+
+
+entity currency #2ef0a9
+entity currency.ID
+entity currency.currency_name
+
+currency.ID --* currency
+currency.currency_name -u-* currency
+
+
+entity neighbours #2ef0a9
+entity neighbours.ID
+entity neighbours.neighbour_name
+entity neighbours.neighbour_id
+
+neighbours.ID -r-* neighbours
+neighbours.neighbour_name -u-* neighbours
+neighbours.neighbour_id -u-* neighbours
+
+
+entity countries #2ef0a9
+entity countries.ID
+entity countries.country_name
+entity countries.country_pres
+entity countries.country_description
+entity countries.last_update
+entity countries.population
+entity countries.currency_ID
+
+countries.ID -u-* countries
+countries.country_name -u-* countries
+countries.country_pres -r-* countries
+countries.country_description -r-* countries
+countries.last_update -l-* countries
+countries.population -l-* countries
+countries.currency_ID --* countries
+
+entity userSex #2ef0a9
+entity userSex.ID
+entity userSex.user_sex
+
+userSex.ID --* userSex 
+userSex.user_sex -u-* userSex 
+
+
+entity userRole #2ef0a9
+entity userRole.ID
+entity userRole.user_role
+
+userRole.ID -u-* userRole
+userRole.user_role -u-* userRole
+
+
+entity statistic #2ef0a9
+entity statistic.ID
+entity statistic.user_id
+entity statistic.queries_count
+entity statistic.filter_ID
+entity statistic.country_ID
+entity statistic.user_count
+
+statistic.ID -r-* statistic
+statistic.user_id -r-* statistic
+statistic.queries_count -r-* statistic
+statistic.filter_ID -l-* statistic
+statistic.country_ID --* statistic
+statistic.user_count --* statistic
+
+
+entity comment #2ef0a9
+entity comment.ID
+entity comment.comment_author
+entity comment.comment_text
+
+comment.ID -l-* comment
+comment.comment_author --* comment
+comment.comment_text --* comment
+
+
+entity filters #2ef0a9
+entity filters.ID
+entity filters.filter_name
+entity filters.filter_count
+
+filters.ID --* filters
+filters.filter_name -u-* filters
+filters.filter_count -u-* filters
+
+
+entity user #2ef0a9
+entity user.ID
+entity user.user_login
+entity user.user_password
+entity user.user_first_name
+entity user.user_last_name
+entity user.user_age
+entity user.user_role_id
+entity user.user_sex_id
+entity user.user_email
+entity user.user_last_update
+
+user.ID --* user
+user.user_login --* user
+user.user_password -u-* user
+user.user_first_name -u-* user
+user.user_last_name -r-* user
+user.user_age -r-* user
+user.user_role_id -r-* user
+user.user_sex_id -l-* user
+user.user_email -l-* user
+user.user_last_update -l-* user
+
+
+
+offCountrySources &quot;n&quot; -r- &quot;1&quot; MassMedia
+countries &quot;1&quot; -u- &quot;n&quot; offCountrySources
+countries &quot;n&quot; -- &quot;1&quot; yellowPress
+countries &quot;n&quot; -l- &quot;1&quot; neighbours
+countries &quot;1&quot; -r- &quot;n*&quot; currency
+countries &quot;n*&quot; -- &quot;1&quot; statistic
+
+
+user &quot;1&quot; -l- &quot;n*&quot; userSex
+user &quot;1&quot; -- &quot;n*&quot; userRole
+statistic &quot;1&quot; -- &quot;n*&quot; user 
+user &quot;n&quot; -l- &quot;1&quot; comment
+
+statistic &quot;1&quot; -r- &quot;n*&quot; filters
+
+
+@enduml
+</code></pre></div><ul><li>ER-модель</li></ul> <div class="language- extra-class"><pre class="language-text"><code>@startuml
+
+
+entity MassMedia #2ef0a9
+{
+ID: INT
+name_media: VARCHAR
+}
+
+
+entity offCountrySources #2ef0a9
+{
+ID:INT
+source_URL: VARCHAR
+mass_media_ID: INT
+country_ID: INT
+}
+
+
+entity yellowPress #2ef0a9
+{
+ID:INT
+country_ID: INT
+yellow_press_URL: VARCHAR
+}
+
+entity currency #2ef0a9
+{
+ID:INT
+currency_name VARCHAR
+}
+
+
+entity neighbours #2ef0a9
+{
+ID:INT
+neighbour_name: VARCHAR
+neighbour_ID: INT
+}
+
+
+entity countries #2ef0a9
+{
+ID:INT
+country_name : VARCHAR
+country_pres: VARCHAR
+country_description: TEXT
+last_update: DATE
+population: INT
+currency_ID: INT
+}
+
+entity userSex #2ef0a9
+{
+ID:INT
+user_sex: VARCHAR
+}
+
+
+entity userRole #2ef0a9
+{
+ID:INT
+user_role: VARCHAR
+}
+
+
+entity statistic #2ef0a9
+{
+ID:INT
+user_id: INT
+queries_count: INT
+filter_ID: INT
+country_ID: INT
+user_count: INT
+}
+
+
+entity comment #2ef0a9
+{
+ID:INT
+comment_author: INT
+comment_text: VARCHAR
+}
+
+
+entity filters #2ef0a9
+{
+ID:INT
+filter_name: VARCHAR
+filter_count: INT
+}
+
+
+entity user #2ef0a9
+{
+ID:INT
+user_login: VARCHAR
+user_password: VARCHAR
+user_first_name: VARCHAR
+user_last_name: VARCHAR
+user_age: INT
+user_role_id: INT
+user_sex_id: INT
+user_email: VARCHAR
+user_last_update: DATE
+}
+
+
+
+offCountrySources &quot;n&quot; -r- &quot;1&quot; MassMedia
+countries &quot;1&quot; -u- &quot;n&quot; offCountrySources
+countries &quot;n&quot; -- &quot;1&quot; yellowPress
+countries &quot;n&quot; -l- &quot;1&quot; neighbours
+countries &quot;1&quot; -r- &quot;n*&quot; currency
+countries &quot;n*&quot; -- &quot;1&quot; statistic
+
+
+user &quot;1&quot; -l- &quot;n*&quot; userSex
+user &quot;1&quot; -- &quot;n*&quot; userRole
+statistic &quot;1&quot; -- &quot;n*&quot; user 
+user &quot;n&quot; -r- &quot;1&quot; comment
+
+statistic &quot;1&quot; -r- &quot;n*&quot; filters
+
+
+@enduml
+</code></pre></div><ul><li>реляційна схема</li></ul> <p>https://imgur.com/HqUt7yN</p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Останнє оновлення:</span> <span class="time">6/4/2022, 2:53:38 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/obd_2022_project/use%20cases/" class="prev">
+        Розроблення вимог до функціональности системи
+      </a></span> <span class="next"><a href="/obd_2022_project/software/">
+        Реалізація інформаційного та програмного забезпечення
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/obd_2022_project/assets/js/app.10c71b05.js" defer></script><script src="/obd_2022_project/assets/js/2.440c787e.js" defer></script><script src="/obd_2022_project/assets/js/17.9700b484.js" defer></script>
+  </body>
+</html>
